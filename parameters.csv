@@ -1,0 +1,16 @@
+parameter,weight_fixed,weight_ai,thresh_T1,thresh_T2,description,reasoning,weight_fixed_default,thresh_T1_default,thresh_T2_default
+created_since,1.0,3.36,0,80,Time since the project was created (in months),"Projects that exist for a longer period of time can indicate higher usage, could have more known vulnerabilities spotted and resolved, and are less likely to be malicious.",1.0,0,80
+updated_since,-3.0,0.32,0,120,Time since the project was last updated (in months),Projects that have not been updated for a certain amount of time could be abandoned or insufficiently maintained.,-1.5,0,120
+contributor_count,1.5,9.37,0,30,Count of project contributors (with commits),"Higher number of contributors indicates a higher chance that the project is receiving proper updates, support, and resources.",1.5,0,30
+org_count,1.0,6.58,0,30,Count of distinct organizations that contributors belong to,Company accounts are likely to be more trustworthy and provide proper maintenance.,1.0,0,30
+commit_frequency,1.0,0.0,0,100,Average number of commits in the last year (max 100),Higher number of commits indicates higher maintenance,1.0,0,100
+releases_count,1.0,10.0,0,30,Number of releases ,"Higher number of releases indicates higher maintenance, less likely to be malicious, more trusted project",1.0,0,30
+closed_issues_count,0.5,5.45,0,100,Number of issues closed in the last 90 days (max. 100),Higher number of closed issues indicates higher user involvement and better maintenance,0.5,0,100
+dependant_projects_count,2.0,9.6,0,10000,Number of dependant projects,"Indicates projects popularity, should be trusted more since potential vulnerabilities can be caught by more people",2.0,0,10000
+all_dependencies_updated,2.0,3.3,0,1,Checks if all transitive dependencies are up to date (0 or 1 value),Outdated transitive dependencies can indicate unmaintained packages,2.0,0,1
+lib_rank,2.0,8.97,0,32,Rank appointed from libraries.io (max. 32),"It is a score based on several markers, we are taking some into account and some not (such as repository present etc.), which is the reason we also look at this score.",2.0,0,32
+not_deprecated,1.0,3.86,0,1,"Is the package marked as deprecated, 0 - deprecated, 1 - not deprecated",Deprecated packages should not be used.,1.0,0,1
+maintained,0.5,0.19,0,1,"Is package marked as not maintained, 0 - unmaintained, 1-maintained",Unmaintained packages should not be used.,0.5,0,1
+not_removed,0.5,1.82,0,1,The project has been removed from the package manager ( 0 removed 1 not removed),Removed packages are unsafe to use.,0.5,0,1
+recent_release,1.5,0.11,0,1,Has the project had a release within the last six months (0 no 1 yes), Projects with a recent release are healthier,1.5,0,1
+homepage_accessible,0.5,3.39,0,1,Is the projects homepage accessible ,"Non-accessible homepages indicate abandoned projects, additional non-github domain indicates the project is more serious are more likely to be maintained ",0.5,0,1

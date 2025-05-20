@@ -37,7 +37,7 @@ exist, it gives a strong indication that the project is abandoned.
 
 ## Formula
 The formula used to calculate the criticality score can be seen in the below figure.
-![formula](images/formula.PNG)  
+![formula](images/formula.png)  
 
 - Si - actual value of a certain marker
 - αi - weight of a certain marker

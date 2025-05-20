@@ -1,7 +1,57 @@
 # Introduction 
 The tool calculates the health score of open source packages. Under 50% is a very low score which usually indicates insufficiently maintained or abandoned packages. 50% - 60% is still quite a low score and usually the packages in question are insufficiently maintained as well.  
 Furthermore, the tool gives various warnings that could flag insufficiently maintained packages, abandoned ones, hostile takeover through maintainer domain hijack, and malicious packages (no malware detection present, only flagging packages that are very fresh or have 0 previous versions).  
-TODO: Add formula and describe the markers
+## Markers
+The tool provides a health score for any open-source library found on Pypi, Maven, npm
+and Conda repositories. The score is calculated based on 15 markers which are listed and explained in the list below.
+
+- **Created since** - Projects that exist for a longer period of time can indicate higher usage,
+could have more known vulnerabilities spotted and resolved, and are less likely to be
+malicious.
+- **Updated since** - Projects that have not been updated for a certain amount of time could
+be abandoned or insufficiently maintained.
+- **Contributor count** - Higher number of contributors indicates a higher chance that the
+project is receiving proper updates, support, and resources
+- **Organisation count** - Company accounts are likely to be more trustworthy and provide
+proper maintenance
+- **Commit frequency** - Higher number of commits indicates higher maintenance. 
+- **Releases count** - Higher number of releases indicates higher maintenance, less likely to
+be malicious, more trusted project.
+- **Closed issues count** - Higher number of closed issues indicates higher user involvement
+and better maintenance
+- **Dependant projects count** - Indicates projects popularity, should be trusted more since
+potential vulnerabilities can be caught by more people.
+- **Dependencies updated** - Outdated transitive dependencies can indicate unmaintained
+packages.
+- **Libraries.io** rank - It is a score provided by Libraries.io and is based on several markers.
+There is a slight overlap with our markers, but it is also taking into account other ones
+(such as is repository present, is the license present, etc.), which is the motivation behind
+looking at this rank as well. The higher rank (max. 32) indicates a safer package.
+- **Not deprecated** - Checks if the package is marked as deprecated by the author.
+- **Maintained** - Checks if the package is marked as unmaintained by the author.
+- **Not removed** - Checks if the package is removed from the package manager.
+- **Recent release** - Checks if the package had a new version in the last six months. Projects
+with a recent release are healthier.
+- **Homepage accessible** - When the homepage of a project is non-accessible or does not
+exist, it gives a strong indication that the project is abandoned.
+
+## Formula
+The formula used to calculate the criticality score can be seen in the below figure.
+![formula](images/formula.PNG)  
+
+- Si - actual value of a certain marker
+- αi - weight of a certain marker
+- T1, T2 - lower and upper thresholds of a certain marker.
+
+
+The logarithm function in the fraction is used to reduce potentially large numbers, and the
+fraction of logarithms provides a result in the 0-1 range. The maximum function in the numerator is used if we want a marker to start from a certain threshold. For example, if we assign
+T1 = 3 for contributors, it would mean that the minimum value in the nominator would always
+be 3. In that case, we are only interested if the project has more than 3 contributors, and not
+if it has 0, 1, 2, or 3 contributors, which we consider equivalent. We did not use this threshold
+T1 for any of our markers, i.e. we assigned it the value zero (so Si
+is always equal or higher),
+but we wanted to introduce this option if a certain user wishes to have a nominator threshold.
 # Getting Started
 ## Usage:
 ### 1. As a desktop application using GUI:  
@@ -29,9 +79,10 @@ For different parameter values:
 - **get parameter information**   
 returns marker description, weights and thresholds  
 `GET http://localhost:5000/info/`    
-![get score](images/info_result.PNG)  
+![get score](images/info_result.PNG)
+*For simplicity, the information shown in the figure is for only one marker, the real result is information about all 15 markers.* 
 
 
-## The readme is not finished, you can reffer to chapter 7 of my master thesis found at https://www.ru.nl/publish/pages/769526/jana_vojnovic.pdf for more information about the tool.
+## The readme is not finished, you can reffer to chapter 7 of my master thesis found at https://www.cs.ru.nl/masters-theses/2023/J_Vojnovic___Mitigating_supply_chain_attacks_through_detection_of_high-risk_software_dependencies.pdf for more information about the tool.
 
 # This tool is not going to be maintained.
